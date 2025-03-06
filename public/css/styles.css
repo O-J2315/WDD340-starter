@@ -1,6 +1,331 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* Mobile View */
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  /* border: solid 2px rgb(97, 0, 0); */
+  border-radius: 5px;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+}
+
+.siteName a {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#tools a {
+  font-size: .6rem;
+  color: #333;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: #333;
+  padding: .7rem;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+nav li {
+  display: block;
+  margin: 0 auto;
+  color:aliceblue;
+  background-color: #333;
+  transition: all 0.5s ease-in-out;
+}
+
+nav li:hover {
+  background-color: #33333378;
+  scale: 1.1;
+  cursor: pointer;
+}
+
+.p-title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #333;
+  text-transform: capitalize;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: left;
+}
+
+.banner {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  padding: 0 1rem 0 1rem;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.info-div {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 40%;
+  max-width: 200px;
+  height: auto;
+  padding: .5rem;
+  align-self: center;
+  justify-content: center;
+  background-color: rgba(199, 199, 201, 0.45);
+  color: rgb(97, 0, 0);
+}
+
+.info-div h2 {
+  font-size: 1rem;
+  text-align: center;
+
+}
+
+.info-div p {
+  font-size: .8rem;
+  text-align: left;
+  font-style: italic;
+}
+
+.info-div img {
+  padding: .5rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+}
+
+.upgrades-container {
+  border: solid 1px rgb(148, 145, 145);
+  padding: 1rem;
+  margin: 1rem auto;
+}
+
+.upgrades {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  gap: .5rem;
+  /* border: solid 1px green; */
+}
+
+.upgrades-container h2 {
+  flex-grow: 1;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.upgrade {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  height: 100%;
+  min-height: 180px;
+  padding: .5rem;
+  align-content: center;
+  justify-content: center;
+  /* background-color: rgba(137, 137, 137, 0.1); */
+}
+
+.upgrade img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  margin: 1rem auto;
+}
+
+.upgrade a {
+  font-size: .7rem;
+  text-align: center;
+  color: #333;
+}
+
+.reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin: 0 auto;
+  width: auto;
+  height: auto;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  border: solid 1px rgb(148, 145, 145);
+}
+
+.reviews-container h2 {
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.reviews-container li {
+  list-style-type: circle;
+  margin: 1rem;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+@media screen and (min-width: 800px) {
+
+  body {
+    width: 80%;
+    margin: 1rem auto;
+    border: solid 2px rgb(97, 0, 0);
+  }
+
+  #top-header {
+    height: 80px;
+  }
+
+  .siteName a {
+    font-size: 2rem;
+  }
+
+  #tools a {
+    font-size: 1rem;
+  }
+
+  nav {
+    height: 50px;
+  }
+
+  .p-title {
+    font-size: 2.1rem;
+  }
+
+  .banner {
+    padding-bottom: 2rem;
+  }
+
+.info-div {
+  width: 50%;
+  max-width: 220px;
+  height: 300px;
+  padding:  1rem 0.2rem 1rem 0.2rem;
+  align-self: center;
+  justify-content: center;
+  background-color: rgba(199, 199, 201, 0.45);
+  color: rgb(97, 0, 0);
+  top: 300px;
+}
+
+.info-div h2 {
+  font-size: 1.6rem;
+  text-align: left;
+  padding-bottom: 2rem;
+}
+
+.info-div p {
+  font-size: 1.1rem; 
+  padding-bottom: 1rem; 
+}
+
+.info-div img {
+  padding: 1rem;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+  .content {
+    flex-direction: row;
+    width: 90%;
+    height: 100%;
+    border: solid 1px rgb(148, 145, 145);
+  }
+
+  .upgrades-container {
+    width: 50%;
+    height: 100%;
+    border: none;
+    align-self: flex-start;
+    margin: 0 auto;
+  }
+  .upgrades-container h2 {
+    font-size: 1.6rem;
+  }
+  .upgrades {
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .upgrade {
+    width: 120px;
+    height: auto;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  .upgrade a {
+    font-size: 1rem;
+  }
+
+  .reviews-container {
+    width: 50%;
+    height: 100%;
+    border: none;
+    border-left: solid 1px rgb(148, 145, 145);
+    align-self: flex-start;
+  }
+  .reviews-container h2 {
+    font-size: 1.6rem;
+  }
+  .reviews-container li {
+    font-size: 1rem;
+    padding: 1rem;
+  }
 }
