@@ -221,10 +221,16 @@ footer {
 
 @media screen and (min-width: 800px) {
 
+  html{
+    background-image: url('../images/site/small_check.jpg');
+    background-size: cover;
+  }
+
   body {
     width: 80%;
     margin: 1rem auto;
     border: solid 2px rgb(97, 0, 0);
+    background-color: white;
   }
 
   #top-header {
@@ -260,7 +266,7 @@ footer {
   justify-content: center;
   background-color: rgba(199, 199, 201, 0.45);
   color: rgb(97, 0, 0);
-  top: 300px;
+  top: 260px;
 }
 
 .info-div h2 {
