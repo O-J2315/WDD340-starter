@@ -63,31 +63,40 @@ Util.buildClassificationGrid = async function(data){
 
 
   // Build the item detail view HTML
-Util.buildItemDetail = async function(data){
-    let item
-    console.log(data)
+  Util.buildItemDetail = async function(data){
+    let item = '';
+    console.log(data);
 
     if(data.length > 0){
+        // First div: Image of the car
+        item += '<div id="inv-image">';
+        item += '<img src="' + data[0].inv_image + '" alt="Image of ' 
+        + data[0].inv_make + ' ' + data[0].inv_model + ' on CSE Motors" />';
+        item += '</div>';
 
-      item = '<div id="inv-display">'
-      item += '<img src="' + data[0].inv_thumbnail + '" alt="Image of ' 
-      + data[0].inv_make + ' ' + data[0].inv_model + ' on CSE Motors" />'
-      item += '<div class="namePrice">'
-      item += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + '</h2>'
-      item += '<span>$' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</span>'
-      item += '</div>'
-      item += '<div class="details">'
-      item += '<ul>'
-      item += '<li><strong>Year:</strong> ' + data[0].inv_year + '</li>'
-      item += '<li><strong>Color:</strong> ' + data[0].inv_color + '</li>'
-      item += '<li><strong>Milage:</strong> ' + data[
-        0].inv_miles + '</li>'
-      }
-      else {
-        item += '<p class="notice">Sorry, that vehicle could not be found.</p>'
-      }
-      return item
-  }
+        // Second div: Car details
+        item += '<div id="inv-details">';
+        item += '<div class="name">';
+        item += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + ' (' + data[0].inv_year + ')</h2></div>';
+        item += '<p><strong>Sales Price:</strong> $' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</p>';
+        item += '<p><strong>Classification:</strong> ' + data[0].classification_name + '</p>';
+        item += '<p><strong>Mileage:</strong> ' + data[0].inv_miles + '</p>';
+        item += '<p><strong>Color:</strong> ' + data[0].inv_color + '</p>';
+        item += '<p><strong>Description:</strong> ' + data[0].inv_description + ' miles</p>';
+        
+        item += '<div class="line"></div>';
+        // Third div: Buttons
+        item += '<button id="buy-now">Buy It Now</button>';
+        item += '<button id="ask-question">Ask a Question</button>';
+
+        item += '</div>'; // End of inv-details div
+    }
+    else {
+        item += '<p class="notice">Sorry, that vehicle could not be found.</p>';
+    }
+
+    return item;
+}
 
 
 

@@ -61,7 +61,6 @@ nav ul {
 nav li {
   display: block;
   margin: 0 auto;
-  color:aliceblue;
   background-color: #333;
   transition: all 0.5s ease-in-out;
 }
@@ -70,6 +69,11 @@ nav li:hover {
   background-color: #33333378;
   scale: 1.1;
   cursor: pointer;
+}
+
+nav a {
+  text-decoration: none;
+  color:aliceblue;
 }
 
 .p-title {
@@ -217,6 +221,111 @@ footer {
   flex-direction: row;
   justify-content: space-around;
 
+}
+
+/* Styling for Detailed View */
+.itemTitle {
+  font-weight: 700;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+}
+#inv-image {
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+#inv-image img {
+  width: 90%;
+  margin: 0 auto;
+  height: auto;
+  /* border-radius: 10px; */
+  box-shadow: #333 1px 1px 5px;
+}
+
+#inv-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: left;
+  padding: 1rem;
+  margin: 0 auto;
+  width: 90%;
+  height: auto;
+  border: solid 1px rgb(148, 145, 145);
+  background-color: rgba(229, 229, 230, 0.45);
+  font-size: large;
+  gap: .5rem;
+}
+
+#inv-details p {
+  text-align: left;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  font-size: medium;
+  font-style: italic;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: #333;
+  margin: 1rem 0 0 0;
+}
+
+/* General button styles */
+button {
+  padding: .5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  outline: none;
+}
+
+/* Buy It Now button */
+.buy-now {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.buy-now:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Ask a Question button */
+.ask-question {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.ask-question:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Optional focus states for accessibility */
+button:focus {
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
 @media screen and (min-width: 800px) {
