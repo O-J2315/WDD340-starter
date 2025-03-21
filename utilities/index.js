@@ -61,4 +61,34 @@ Util.buildClassificationGrid = async function(data){
 
 
 
+
+  // Build the item detail view HTML
+Util.buildItemDetail = async function(data){
+    let item
+    console.log(data)
+
+    if(data.length > 0){
+
+      item = '<div id="inv-display">'
+      item += '<img src="' + data[0].inv_thumbnail + '" alt="Image of ' 
+      + data[0].inv_make + ' ' + data[0].inv_model + ' on CSE Motors" />'
+      item += '<div class="namePrice">'
+      item += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + '</h2>'
+      item += '<span>$' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</span>'
+      item += '</div>'
+      item += '<div class="details">'
+      item += '<ul>'
+      item += '<li><strong>Year:</strong> ' + data[0].inv_year + '</li>'
+      item += '<li><strong>Color:</strong> ' + data[0].inv_color + '</li>'
+      item += '<li><strong>Milage:</strong> ' + data[
+        0].inv_miles + '</li>'
+      }
+      else {
+        item += '<p class="notice">Sorry, that vehicle could not be found.</p>'
+      }
+      return item
+  }
+
+
+
 module.exports = Util
