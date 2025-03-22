@@ -69,6 +69,7 @@ Util.buildClassificationGrid = async function(data){
 
     if(data.length > 0){
         // First div: Image of the car
+        item += '<div class="inv-display">';
         item += '<div id="inv-image">';
         item += '<img src="' + data[0].inv_image + '" alt="Image of ' 
         + data[0].inv_make + ' ' + data[0].inv_model + ' on CSE Motors" />';
@@ -80,16 +81,19 @@ Util.buildClassificationGrid = async function(data){
         item += '<h2>' + data[0].inv_make + ' ' + data[0].inv_model + ' (' + data[0].inv_year + ')</h2></div>';
         item += '<p><strong>Sales Price:</strong> $' + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</p>';
         item += '<p><strong>Classification:</strong> ' + data[0].classification_name + '</p>';
-        item += '<p><strong>Mileage:</strong> ' + data[0].inv_miles + '</p>';
+        item += '<p><strong>Mileage:</strong> ' + new Intl.NumberFormat('en-US').format(data[0].inv_miles) + ' miles</p>';
         item += '<p><strong>Color:</strong> ' + data[0].inv_color + '</p>';
         item += '<p><strong>Description:</strong> ' + data[0].inv_description + ' miles</p>';
         
         item += '<div class="line"></div>';
         // Third div: Buttons
+        item += '<div class="inv-buttons">';
         item += '<button id="buy-now">Buy It Now</button>';
         item += '<button id="ask-question">Ask a Question</button>';
+        item += '</div>'; // End of inv-buttons div
 
         item += '</div>'; // End of inv-details div
+        item += '</div>'; // End of inv-display div
     }
     else {
         item += '<p class="notice">Sorry, that vehicle could not be found.</p>';
@@ -98,6 +102,14 @@ Util.buildClassificationGrid = async function(data){
     return item;
 }
 
-
+/* ****************************************
+ * Middleware For Handling Errors
+ * Wrap other function in this for 
+ * General Error Handling
+ **************************************** */
+Util.handleErrors = fn => (req, res, next) => {
+  // Wrapping the function call in a Promise to ensure errors are caught
+  Promise.resolve(fn(req, res, next)).catch(next);
+};
 
 module.exports = Util

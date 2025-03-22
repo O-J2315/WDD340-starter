@@ -9,4 +9,5 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build the inventory item detail view
 router.get("/detail/:invId", invController.buildByInvId);
 
+
 module.exports = router;

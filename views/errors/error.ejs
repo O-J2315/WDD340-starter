@@ -1,0 +1,15 @@
+<% if (title) { %>
+    <h1 class="ErrTitle">Error: <%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <%# messages() %>
+
+    <div class="error">
+      <h2 class="errorTitle">Error :/</h2>
+      <p class="errorP"><%- message %></p>
+      <a href="/">Back to home page</a>
+    </div>
+    
+

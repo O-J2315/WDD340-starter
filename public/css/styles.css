@@ -220,7 +220,7 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
+  margin: 1rem;
 }
 
 /* Styling for Detailed View */
@@ -285,6 +285,15 @@ footer {
   margin: 1rem 0 0 0;
 }
 
+.inv-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
 /* General button styles */
 button {
   padding: .5rem;
@@ -326,6 +335,34 @@ button {
 /* Optional focus states for accessibility */
 button:focus {
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.ErrTitle {
+  text-align: center;
+  padding: .5rem;
+}
+
+.error a {
+  color: #333;
+  text-decoration: none;
+  padding: 1rem;
+  margin: 1rem;
+  transition: all 0.3s ease;
+
+}
+
+.error a:hover {
+  color: #333;
+  transform: scale(1.1);
 }
 
 @media screen and (min-width: 800px) {
@@ -443,4 +480,41 @@ button:focus {
     font-size: 1rem;
     padding: 1rem;
   }
+
+  .inv-display {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  #inv-image {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 1rem;
+    
+  }
+
+  #inv-image img {
+    width: 100%;
+    height: auto;
+    /* border-radius: 10px; */
+    padding: 0;
+    margin: 0;
+    border-bottom: solid 10px rgb(97, 0, 0);
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .inv-details p {
+    font-size: 1rem;
+  }
+
+
 }
