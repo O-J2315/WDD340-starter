@@ -251,7 +251,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  align-items: left;
+  /* align-items: left; */
   padding: 1rem;
   margin: 0 auto;
   width: 90%;
