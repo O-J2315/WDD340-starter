@@ -1,0 +1,28 @@
+<% if (title) { %>
+    <h1 class="register-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+    <div class="register-form">
+        <form action="/account/register" method="post">
+
+            <label for="name">First name:</label>
+            <input type="text" id="name" name="account_firstname" required autocomplete="name">
+
+            <label for="lastname">Last name:</label>
+            <input type="text" id="lastname" name="account_lastname" required autocomplete="lastname">
+
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="account_email" required autocomplete="email">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="account_password" required required autocomplete="off">
+
+
+            <button type="submit">Register</button>
+            <!-- <p>No Account? <a href="/">Sign-up</a></p> -->
+        </form>
+    </div>

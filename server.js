@@ -5,6 +5,11 @@
 /* ***********************
  * Require Statements
  *************************/
+const session = require("express-session")
+const pool = require('./database/')
+const bodyParser = require("body-parser")
+
+
 const express = require("express")
 const env = require("dotenv").config()
 const app = express()
@@ -14,8 +19,32 @@ const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const invController = require("./controllers/invController")
 const errorController = require("./controllers/errorController")
+const accountController = require("./controllers/accountController")
 
 
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 /* ***********************
  * View Engine and Templates
@@ -31,6 +60,7 @@ app.set("layout", "./layouts/layout") // not at views root
 app.use(static)
 app.use('/inv', require('./routes/inventoryRoute'))
 app.use('/trigger-error', require('./routes/errorRoute'))
+app.use('/account', require('./routes/accountRoute'))
 
 /* ***********************
  * Local Server Information
@@ -53,6 +83,10 @@ app.get("/type/:classificationId", utilities.handleErrors(invController.buildByC
 app.get("/detail/:invId", utilities.handleErrors(invController.buildByInvId));
 // Error Route
 app.get("/trigger-error", utilities.handleErrors(errorController.triggerError));
+// Login Route
+app.get("/account/login", utilities.handleErrors(accountController.buildLogin));
+// Register Route
+app.get("/account/register", utilities.handleErrors(accountController.buildRegister));
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
