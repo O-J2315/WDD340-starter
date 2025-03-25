@@ -1,5 +1,6 @@
 // Needed Resources 
 const express = require("express")
+const regValidate = require('../utilities/account-validation')
 const router = new express.Router() 
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities")
@@ -11,7 +12,7 @@ router.get("/account/login", accountController.buildLogin);
 router.get("/account/register", accountController.buildRegister);
 
 // Route to register an account
-router.post('/register', utilities.handleErrors(accountController.registerAccount))
+router.post('/register', regValidate.registationRules(), regValidate.checkRegData, utilities.handleErrors(accountController.registerAccount))
 
 
 

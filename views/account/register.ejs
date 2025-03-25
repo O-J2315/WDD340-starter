@@ -4,8 +4,6 @@
       res.redirect('/')
     } %>
 
-<%- messages() %>
-
     <div class="register-form">
         <form action="/account/register" method="post">
 
@@ -26,4 +24,12 @@
             <button type="submit">Register</button>
             <!-- <p>No Account? <a href="/">Sign-up</a></p> -->
         </form>
+
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
     </div>
