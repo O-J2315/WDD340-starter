@@ -43,5 +43,59 @@ async function getInventoryByItemId(invId) {
   }
 }
 
+// Add New Classification
+async function addClassification(classificationName) {
+  try {
+    const data = await pool.query(
+      `INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *`,
+      [classificationName]
+    )
+    console.log(data.rows)
+    return data.rows
+  } catch (error) {
+    console.error("addClassification error " + error)
+  }
+}
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByItemId};
+// Add New Inventory Item
+async function addInventoryItem(invYear, invMake, invModel, classificationId) {
+  try {
+    // Check if the classification already exists
+    const existingClassification = await pool.query(
+      `SELECT * FROM public.classification WHERE classification_name = $1`,
+      [classificationName]
+    );
+
+    // If the classification exists, return an error message or do nothing
+    if (existingClassification.rows.length > 0) {
+      console.log("Classification already exists.");
+      return { error: "Classification already exists" };
+    }
+
+    // If it doesn't exist, insert the new classification
+    const data = await pool.query(
+      `INSERT INTO public.classification (classification_name) VALUES ($1) RETURNING *`,
+      [classificationName]
+    );
+
+    console.log(data.rows);
+    return data.rows;
+  } catch (error) {
+    console.error("addInventoryItem error " + error)
+  }
+}
+
+ async function checkClassificationName(classificationName) {
+  try {
+    const data = await pool.query(
+      `SELECT * FROM public.classification WHERE classification_name = $1`,
+      [classificationName]
+    )
+    return data.rows
+  } catch (error) {
+    console.error("checkClassificationName error " + error)
+  }
+}
+
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryByItemId, addClassification, addInventoryItem, checkClassificationName};

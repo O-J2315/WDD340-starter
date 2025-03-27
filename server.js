@@ -87,6 +87,12 @@ app.get("/trigger-error", utilities.handleErrors(errorController.triggerError));
 app.get("/account/login", utilities.handleErrors(accountController.buildLogin));
 // Register Route
 app.get("/account/register", utilities.handleErrors(accountController.buildRegister));
+// Manage Inventory Route
+app.get("/inv/manage", utilities.handleErrors(invController.buildInventoryManagement));
+// Add Classification Route
+app.get("/inv/addClassification", utilities.handleErrors(invController.buildAddClassification));
+// Add Inventory Route
+app.get("/inv/addInventory", utilities.handleErrors(invController.buildAddInventory));
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

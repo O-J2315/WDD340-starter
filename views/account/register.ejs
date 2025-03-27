@@ -8,13 +8,13 @@
         <form action="/account/register" method="post">
 
             <label for="name">First name:</label>
-            <input type="text" id="name" name="account_firstname" autocomplete="name" required>
+            <input type="text" id="name" name="account_firstname" autocomplete="name" required value="<%= locals.account_firstname %>">
 
             <label for="lastname">Last name:</label>
-            <input type="text" id="lastname" name="account_lastname"  autocomplete="lastname" required>
+            <input type="text" id="lastname" name="account_lastname"  autocomplete="lastname" required value="<%= locals.account_lastname %>">
 
             <label for="email">Email:</label>
-            <input type="email" name="account_email" required placeholder="Enter a valid email address">
+            <input type="email" name="account_email" required placeholder="Enter a valid email address" value="<%= locals.account_email %>">
 
             <label for="accountPassword">Password:</label> 
             <span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> 

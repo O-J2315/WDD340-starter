@@ -64,5 +64,87 @@ invCont.buildByInvId = async function (req, res, next) {
   }
 };
 
+// Build the inventory management view
+invCont.buildInventoryManagement = async function (req, res, next) {
+  try {
+    // Get the navigation data
+    let nav = await utilities.getNav();
+
+    // Render the inventory management page
+    res.render("./inventory/management", {
+      title: "Inventory Management", // Title of the page
+      nav,
+    });
+
+
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+// Build the inventory addClassification view
+invCont.buildAddClassification = async function (req, res, next) {
+  try {
+    // Get the navigation data
+    let nav = await utilities.getNav();
+
+    // Render the add classification page
+    res.render("./inventory/addClassification", {
+      title: "Add Classification", // Title of the page
+      nav,
+      errors: null,
+    });
+
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+// Build the inventory addInventory view
+invCont.buildAddInventory = async function (req, res, next) {
+  try {
+    // Get the navigation data
+    let nav = await utilities.getNav();
+
+    // Render the add inventory page
+    res.render("./inventory/addInventory", {
+      title: "Add Inventory", // Title of the page
+      nav,
+      errors: null,
+    });
+
+  } catch (err) {
+    console.error(err);
+    next(err);
+  }
+};
+
+
+// Process Add New Classification
+invCont.addClassification = async function (req, res) {
+  let nav = await utilities.getNav()
+  const classification_name = req.body.classification_name
+  console.log('test')
+  console.log(classification_name)
+
+const regResult = await invModel.addClassification(
+    classification_name
+  )
+
+  if (regResult) {
+    console.log(regResult)
+    req.flash(
+      "notice",
+      `Congratulations, ${classification_name}. Classification added successfully!`
+    )
+    
+    res.redirect("/inv/manage")
+  } else {
+    req.flash("notice", "Sorry, the request could not be completed.")
+    res.redirect("/inv/manage")
+  }
+}
 
 module.exports = invCont

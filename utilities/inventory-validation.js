@@ -1,4 +1,4 @@
-const accountModel = require("../models/account-model")
+const inventoryModel = require("../models/inventory-model")
 
 const utilities = require(".")
   const { body, validationResult } = require("express-validator")
@@ -10,7 +10,7 @@ const utilities = require(".")
   validate.registationRules = () => {
     return [
       // firstname is required and must be string
-      body("account_firstname")
+      body("inv_make")
         .trim()
         .escape()
         .notEmpty()
@@ -18,7 +18,7 @@ const utilities = require(".")
         .withMessage("Please provide a first name."), // on error this message is sent.
   
       // lastname is required and must be string
-      body("account_lastname")
+      body("inv_model")
         .trim()
         .escape()
         .notEmpty()
@@ -26,7 +26,7 @@ const utilities = require(".")
         .withMessage("Please provide a last name."), // on error this message is sent.
   
       // valid email is required and cannot already exist in the database
-      body("account_email")
+      body("inv_year")
       .trim()
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
@@ -39,7 +39,7 @@ const utilities = require(".")
       }),
   
       // password is required and must be strong password
-      body("account_password")
+      body("inv_description")
         .trim()
         .notEmpty()
         .isStrongPassword({
