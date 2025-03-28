@@ -609,7 +609,25 @@ input:required:valid {
   border-color: #28a745; /* Valid textarea border color */
 }
 
+.notice li {
+  list-style-type: circle;
+  padding: 1rem;
+  text-align: left;
+  font-size: .8rem;
+  text-align: left;
+  color: rgb(97, 0, 0);
+  font-style: italic;
+  animation: fadeOut 10s ease-out forwards;
+}
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 @media screen and (min-width: 800px) {
 

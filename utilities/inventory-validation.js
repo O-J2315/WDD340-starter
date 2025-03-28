@@ -80,7 +80,7 @@ const utilities = require(".")
         .escape()
         .notEmpty()
         .isNumeric()
-        .isLength({ max: 1 })
+        .isLength({ max: 2 })
         .withMessage("Please select a Classification."), // on error this message is sent.
     ]
   }
