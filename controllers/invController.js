@@ -167,9 +167,11 @@ invCont.addInventoryItem = async function (req, res) {
     inv_thumbnail, // Thumbnail from the form
   } = req.body;
 
+  const nav = await utilities.getNav();
+
   // Default image paths in case no image is uploaded
-  const defaultImagePath = 'vehicle_images/no_image_available.jpg';
-  const defaultThumbnailPath = 'vehicle_images/no_thumbnail.jpg';
+  const defaultImagePath = '/images/vehicles/no-image.png';
+  const defaultThumbnailPath = '/images/vehicles/no-image-tn.png';
 
   // Validation for required fields (simple example)
   const errors = {};
@@ -184,11 +186,12 @@ invCont.addInventoryItem = async function (req, res) {
 
   if (Object.keys(errors).length > 0) {
     // Return to form with errors and sticky data
-    let classificationList = await Util.buildClassificationList(classification_id);
-    return res.render('inventory/addVehicle', {
+    let classificationList = await utilities.buildClassificationList(classification_id);
+    return res.render('inventory/addInventory', {
       title: 'Add New Vehicle',
       classificationList: classificationList,
       vehicleData: req.body,
+      nav,
       errors: errors // Pass errors back to the form
     });
   }
@@ -212,27 +215,35 @@ invCont.addInventoryItem = async function (req, res) {
       inv_thumbnail: thumbnailPath
     });
 
-    if (regResult && regResult.rowCount > 0) {
+    console.log('regResult')
+    console.log(regResult)
+    console.log('regResult.rowCount')
+    console.log(regResult.rowCount)
+    //chech if insert was successful
+    // Check if the insert was successful
+    // Assuming regResult.rowCount > 0 indicates success
+
+    if (regResult) {
       req.flash("notice", "Vehicle added successfully!");
       return res.redirect("/inv/manage"); // Redirect after successful insert
     } else {
       req.flash("notice", "Failed to add vehicle. Please try again.");
-      let classificationList = await Util.buildClassificationList(classification_id);  // Keep the selected classification
-      return res.render('inventory/addVehicle', {
+      let classificationList = await utilities.buildClassificationList(classification_id);  // Keep the selected classification
+      return res.render('inventory/addInventory', {
         title: 'Add New Vehicle',
         classificationList: classificationList,
-        vehicleData: req.body,
+        nav,
         errors: {} // No errors here
       });
     }
   } catch (err) {
     console.error("Error adding vehicle: ", err);
     req.flash("notice", "There was an error processing your request.");
-    let classificationList = await Util.buildClassificationList(classification_id);  // Keep the selected classification
-    return res.render('inventory/addVehicle', {
+    let classificationList = await utilities.buildClassificationList(classification_id);  // Keep the selected classification
+    return res.render('inventory/addInventory', {
       title: 'Add New Vehicle',
       classificationList: classificationList,
-      vehicleData: req.body,
+      nav,
       errors: {} // No errors here
     });
   }

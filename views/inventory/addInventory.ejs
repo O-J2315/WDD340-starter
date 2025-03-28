@@ -8,7 +8,7 @@
 
 
 <form class="management-form" action="/inv/addInventory" method="post">
-  <h2>Add Vehicle</h2>
+  <h2>Register a New Vehicle</h2>
   <div>
     <label for="inv_make">Make:</label>
     <input type="text" id="inv_make" name="inv_make" value="<%= locals.inv_make %>" required />
@@ -86,10 +86,3 @@
   <button type="submit">Add Vehicle</button>
 </form>
 
-<% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-  <% } %>
