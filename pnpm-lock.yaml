@@ -20,6 +20,9 @@ importers:
       connect-pg-simple:
         specifier: ^10.0.0
         version: 10.0.0
+      cse340:
+        specifier: 'link:'
+        version: 'link:'
       dotenv:
         specifier: ^16.0.3
         version: 16.4.7
