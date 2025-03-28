@@ -220,7 +220,11 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin: 1rem;
+  margin: 1rem auto;
+  width: 100%;
+  height: auto;
+  padding: 1rem;
+  border-top: solid 1px rgb(148, 145, 145);
 }
 
 /* Styling for Detailed View */
@@ -498,13 +502,30 @@ input:required:valid {
   margin: 1rem auto;
 }
 
-.management-form input {
+.management-form input, .management-form select {
   width: 100%;
   height: 2rem;
   padding: .5rem;
   margin: .5rem;
   border: solid 1px rgb(148, 145, 145);
   border-radius: 5px;
+}
+
+.management-form input[type="file"] {
+  width: 100%;
+  height: auto;
+  padding: .5rem;
+  margin: .5rem;
+  border: solid 1px rgb(148, 145, 145);
+  border-radius: 5px;
+}
+.management-form input[type="file"]::file-selector-button {
+  background-color: #333;
+  color: #ffffff;
+  border: none;
+  padding: .5rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .management-form label {
@@ -540,7 +561,55 @@ input:required:valid {
 
 .management-form input:required:valid {
   border-color: #28a745;
- }
+}
+
+/* File input valid/invalid border */
+.management-form input[type="file"]:required:invalid {
+  border-color: rgb(174, 0, 0); /* Invalid file input border color */
+}
+
+.management-form input[type="file"]:required:valid {
+  border-color: #28a745; /* Valid file input border color */
+}
+
+/* Select input valid/invalid border */
+.management-form select:required:invalid {
+  border-color: rgb(174, 0, 0); /* Invalid select input border color */
+}
+
+.management-form select:required:valid {
+  border-color: #28a745; /* Valid select input border color */
+}
+
+.management-form div {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: .5rem;
+}
+
+.management-form textarea {
+  width: 100%;
+  height: 6rem; /* You can adjust the height as needed */
+  padding: .5rem;
+  margin: .5rem;
+  border: solid 1px rgb(148, 145, 145);
+  border-radius: 5px;
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Textarea valid/invalid border */
+.management-form textarea:required:invalid {
+  border-color: rgb(174, 0, 0); /* Invalid textarea border color */
+}
+
+.management-form textarea:required:valid {
+  border-color: #28a745; /* Valid textarea border color */
+}
+
+
 
 @media screen and (min-width: 800px) {
 
