@@ -7,7 +7,7 @@ const utilities = require(".")
   /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
-  validate.registationRules = () => {
+  validate.addInvRules = () => {
     return [
       // firstname is required and must be string
       body("inv_make")
@@ -15,60 +15,102 @@ const utilities = require(".")
         .escape()
         .notEmpty()
         .isLength({ min: 1 })
-        .withMessage("Please provide a first name."), // on error this message is sent.
-  
-      // lastname is required and must be string
+        .withMessage("Please provide a Make Name."), // on error this message is sent.
+        
       body("inv_model")
         .trim()
         .escape()
         .notEmpty()
-        .isLength({ min: 2 })
-        .withMessage("Please provide a last name."), // on error this message is sent.
-  
-      // valid email is required and cannot already exist in the database
+        .isLength({ min: 1 })
+        .withMessage("Please provide a Model Name."), // on error this message is sent.
+
       body("inv_year")
-      .trim()
-      .isEmail()
-      .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
-        if (emailExists){
-          throw new Error("Email exists. Please log in or use different email")
-        }
-      }),
-  
-      // password is required and must be strong password
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 4 })
+        .isNumeric()
+        .isInt({ min: 1900, max: new Date().getFullYear() })
+        .withMessage("Please provide a Year."), // on error this message is sent.
+
       body("inv_description")
         .trim()
+        .escape()
         .notEmpty()
-        .isStrongPassword({
-          minLength: 12,
-          minLowercase: 1,
-          minUppercase: 1,
-          minNumbers: 1,
-          minSymbols: 1,
-        })
-        .withMessage("Password does not meet requirements."),
+        .isLength({ min: 1 })
+        .withMessage("Please provide a Description."), // on error this message is sent.
+
+      // body("inv_image")
+      //   .trim()
+      //   .escape()
+      //   .notEmpty()
+      //   .isLength({ min: 1 })
+      //   .withMessage("Please provide an Image."), // on error this message is sent.
+
+      // body("inv_thumbnail")
+      //   .trim()
+      //   .escape()
+      //   .notEmpty()
+      //   .isLength({ min: 1 })
+      //   .withMessage("Please provide a Thumbnail."), // on error this message is sent.
+
+      body("inv_price")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isNumeric()
+        .withMessage("Please provide a Price."), // on error this message is sent.
+
+      body("inv_miles")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isNumeric()
+        .withMessage("Please provide Miles."), // on error this message is sent.
+
+      body("inv_color")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isLength({ min: 1 })
+        .withMessage("Please provide a Color."), // on error this message is sent.
+
+      body("classification_id")
+        .trim()
+        .escape()
+        .notEmpty()
+        .isNumeric()
+        .isLength({ max: 1 })
+        .withMessage("Please select a Classification."), // on error this message is sent.
     ]
   }
 
   /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
-validate.checkRegData = async (req, res, next) => {
-    const { account_firstname, account_lastname, account_email } = req.body
+validate.checkInvData = async (req, res, next) => {
+    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      res.render("account/register", {
+      let classificationList = await utilities.buildClassificationList()
+      res.render("inventory/addInventory", {
         errors,
-        title: "Registration",
+        title: "Add Inventory",
         nav,
-        account_firstname,
-        account_lastname,
-        account_email,
+        classificationList,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id,
+
       })
       return
     }

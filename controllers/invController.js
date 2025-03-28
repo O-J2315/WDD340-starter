@@ -113,7 +113,7 @@ invCont.buildAddInventory = async function (req, res, next) {
     res.render("./inventory/addInventory", {
       title: "Add Inventory", // Title of the page
       nav,
-      classificationList, // Pass the classification list to the view
+      classificationList: classificationList, // Pass the classification list to the view
       errors: null,
     });
 
@@ -172,29 +172,6 @@ invCont.addInventoryItem = async function (req, res) {
   // Default image paths in case no image is uploaded
   const defaultImagePath = '/images/vehicles/no-image.png';
   const defaultThumbnailPath = '/images/vehicles/no-image-tn.png';
-
-  // Validation for required fields (simple example)
-  const errors = {};
-  if (!inv_make) errors.inv_make = "Make is required";
-  if (!inv_model) errors.inv_model = "Model is required";
-  if (!inv_year) errors.inv_year = "Year is required";
-  if (!inv_description) errors.inv_description = "Description is required";
-  if (!inv_price || inv_price <= 0) errors.inv_price = "Valid price is required";
-  if (!inv_miles || inv_miles < 0) errors.inv_miles = "Valid mileage is required";
-  if (!inv_color) errors.inv_color = "Color is required";
-  if (!classification_id) errors.classification_id = "Please select a classification";
-
-  if (Object.keys(errors).length > 0) {
-    // Return to form with errors and sticky data
-    let classificationList = await utilities.buildClassificationList(classification_id);
-    return res.render('inventory/addInventory', {
-      title: 'Add New Vehicle',
-      classificationList: classificationList,
-      vehicleData: req.body,
-      nav,
-      errors: errors // Pass errors back to the form
-    });
-  }
 
   // Use the default image paths if no files are uploaded
   const imagePath = inv_image ? inv_image : defaultImagePath;

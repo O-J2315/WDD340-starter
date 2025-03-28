@@ -1,5 +1,6 @@
 // Needed Resources 
-const regValidate = require('../utilities/classification-validation')
+const classValidate = require('../utilities/classification-validation')
+const invValidate = require('../utilities/inventory-validation')
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
@@ -21,9 +22,9 @@ router.get("/addClassification", utilities.handleErrors(invController.buildAddCl
 router.get("/addInventory", utilities.handleErrors(invController.buildAddInventory));
 
 // route to process the add Classification form
-router.post('/addClassification',  utilities.handleErrors(invController.addClassification));
+router.post('/addClassification', classValidate.addClassRules(), classValidate.checkClassData, utilities.handleErrors(invController.addClassification));
 
 // route to process the add Inventory form
-router.post('/addInventory', utilities.handleErrors(invController.addInventoryItem));
+router.post('/addInventory', invValidate.addInvRules(), invValidate.checkInvData, utilities.handleErrors(invController.addInventoryItem));
 
 module.exports = router;
