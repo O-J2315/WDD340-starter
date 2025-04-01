@@ -8,7 +8,7 @@
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
-
+const cookieParser = require("cookie-parser")
 
 const express = require("express")
 const env = require("dotenv").config()
@@ -46,6 +46,12 @@ app.use(function(req, res, next){
   next()
 })
 
+// Cookie Parser Middleware
+app.use(cookieParser())
+
+app.use(utilities.checkJWTToken)
+
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -61,6 +67,7 @@ app.use(static)
 app.use('/inv', require('./routes/inventoryRoute'))
 app.use('/trigger-error', require('./routes/errorRoute'))
 app.use('/account', require('./routes/accountRoute'))
+
 
 /* ***********************
  * Local Server Information
@@ -93,6 +100,8 @@ app.get("/inv/manage", utilities.handleErrors(invController.buildInventoryManage
 app.get("/inv/addClassification", utilities.handleErrors(invController.buildAddClassification));
 // Add Inventory Route
 app.get("/inv/addInventory", utilities.handleErrors(invController.buildAddInventory));
+
+app.get('/account/', utilities.handleErrors(accountController.buildAccountHome));
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

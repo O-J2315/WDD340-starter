@@ -9,12 +9,20 @@
     <div class="login-form">
         <form id="loginForm" action="/account/login" method="post">
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required autocomplete="email">
+            <input type="text" id="email" name="account_email" required autocomplete="email">
 
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required required autocomplete="off">
+            <input type="password" id="password" name="account_password" required required autocomplete="off">
 
             <button type="submit">Login</button>
             <p>No Account? <a href="/account/register">Sign-up</a></p>
         </form>
+
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
     </div>

@@ -49,7 +49,6 @@ const utilities = require(".")
           minNumbers: 1,
           minSymbols: 1,
         })
-        .withMessage("Password does not meet requirements."),
     ]
   }
 
@@ -73,6 +72,50 @@ validate.checkRegData = async (req, res, next) => {
       return
     }
     next()
+  }
+
+  validate.loginRules = () => {
+    return [
+        // Ensure email is provided and exists in the database
+        body("account_email")
+            .trim()
+            .isEmail()
+            // .normalizeEmail()
+            .withMessage("A valid email is required.")
+            .custom(async (account_email) => {
+                const emailExists = await accountModel.checkExistingEmail(account_email);
+                if (!emailExists) {
+                    throw new Error("Email is not registered.");
+                }
+            }),
+
+        // Ensure password is provided (No need to enforce strong password rules)
+        body("account_password")
+            .trim()
+            .notEmpty()
+            .withMessage("Password is required."),
+    ];
+};
+
+  validate.checkLoginData = async (req, res, next) => {
+    console.log('checking rules')
+    console.log(req.body)
+    const { account_email, account_password} = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      console.log('errors' + errors)
+      let nav = await utilities.getNav()
+      res.render("account/login", {
+        errors,
+        title: "Account M",
+        nav,
+        account_email,
+        account_password,
+      })
+      return
+    }
+    next()  
   }
   
   module.exports = validate
