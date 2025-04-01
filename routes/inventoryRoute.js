@@ -27,6 +27,10 @@ router.post('/addClassification', classValidate.addClassRules(), classValidate.c
 // route to process the add Inventory form
 router.post('/addInventory', invValidate.addInvRules(), invValidate.checkInvData, utilities.handleErrors(invController.addInventoryItem));
 
+//get the classification list as JSON
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+//Build the edit view by id
+router.get('/edit/:invId', utilities.handleErrors(invController.buildEditById))
 
 module.exports = router;
