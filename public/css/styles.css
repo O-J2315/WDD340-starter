@@ -629,6 +629,51 @@ input:required:valid {
   }
 }
 
+.inventoryDisplay {
+  margin: 0 auto;
+  padding: 1rem;
+  width: 80%;
+  height: auto;
+  text-align: center;
+}
+
+.inventoryDisplay h2 {
+  padding: 1rem;
+}
+
+#inventoryDisplay {
+  padding: 1rem;
+  margin: 1rem auto;
+ 
+}
+
+.tbody-active {
+  border: solid 1px rgb(148, 145, 145);
+  box-shadow: #333 1px 1px 5px;
+}
+
+#inventoryDisplay tr, #inventoryDisplay td {
+  text-align: left;
+  padding: .5rem;
+}
+
+#inventoryDisplay tr:nth-child(even) {
+  background-color: #96969660;
+}
+
+#inventoryDisplay td a {
+  display: inline-block;
+  font-style: italic;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  color: rgb(23, 114, 84);
+}
+
+#inventoryDisplay td a:hover {
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
 @media screen and (min-width: 800px) {
 
   html{
