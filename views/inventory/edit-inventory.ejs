@@ -7,7 +7,7 @@
 <%- messages() %>
 
 
-<form class="management-form" action="/inv/update" method="post">
+<form class="management-form" id="updateForm" action="/inv/update" method="post">
   <h2>Edit Vehicle</h2>
   <div>
     <label for="inv_make">Make:</label>
@@ -57,7 +57,12 @@
     <input type="file" id="inv_thumbnail" name="inv_thumbnail" accept="image/*">
   </div>
 
-  <button type="submit" name="submit" value="Update Vehicle" >Update Vehicle</button>
+  <button type="submit" name="submit" value="Update Vehicle" disabled>Update Vehicle</button>
+
+  <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> 
+      value="<%= locals.inv_id %>"
+    <% } %>>
 </form>
 
 <%- messages() %>
@@ -70,3 +75,5 @@
 <%  }) %>
  </ul>
 <% } %>
+
+

@@ -1,0 +1,52 @@
+<% if (title) { %>
+    <h1 class="management-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+
+<form class="management-form" id="updateForm" action="/inv/delete" method="post">
+  <h2>Delete Vehicle</h2>
+  <div>
+    <label for="inv_make">Make:</label>
+    <input type="text" readonly id="inv_make" name="inv_make" value="<%= inv_make %>" required />
+  </div>
+
+  <div>
+    <label for="inv_model">Model:</label>
+    <input type="text" readonly id="inv_model" name="inv_model" value="<%= inv_model %>" required />
+  </div>
+
+  <div>
+    <label for="inv_year">Year:</label>
+    <input type="number" readonly id="inv_year" name="inv_year" value="<%= inv_year %>" required />
+  </div>
+
+  <div>
+    <label for="inv_price">Price:</label>
+    <input type="number" readonly id="inv_price" name="inv_price" value="<%= inv_price %>" required />
+  </div>
+
+  <p>Confirm Deletion - The delete is permanent.</p>
+  <button type="submit" name="submit" value="Delete Vehicle">Delete Vehicle</button>
+
+  <input type="hidden" name="inv_id"
+    <% if(locals.inv_id) { %> 
+      value="<%= locals.inv_id %>"
+    <% } %>>
+</form>
+
+<%- messages() %>
+
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+

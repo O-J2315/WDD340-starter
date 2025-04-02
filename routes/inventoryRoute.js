@@ -33,4 +33,13 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 //Build the edit view by id
 router.get('/edit/:invId', utilities.handleErrors(invController.buildEditById))
 
+//Update request
+router.post("/update/", invValidate.addInvRules(), invValidate.checkUpdateData, utilities.handleErrors(invController.updateInventory))
+
+//Get the delete view 
+router.get('/delete/:invId', utilities.handleErrors(invController.buildDeleteById))
+
+//Delete request
+router.post('/delete/', utilities.handleErrors(invController.deleteInventoryItem))
+
 module.exports = router;
