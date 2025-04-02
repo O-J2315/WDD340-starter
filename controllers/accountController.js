@@ -2,6 +2,7 @@ const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
+const { logout } = require("lint/utils/user")
 require("dotenv").config()
 
 /* ****************************************
@@ -124,15 +125,58 @@ async function accountLogin(req, res) {
   }
 }
 
-//Build the accound home page
+// Build the account home page
 async function buildAccountHome(req, res, next) {
-  let nav = await utilities.getNav()
-  res.render("account/", {
-    title: "Account Management",
-    nav,
-    errors: null
-  })
+  // Get navigation data
+  let nav = await utilities.getNav();
+  
+  // Check if user is logged in and account data is available
+  console.log(res.locals.loggedin)
+  if (res.locals.loggedin === 1) {
+    // Pass account data to the view for rendering
+    res.render("account/", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      loggedin: res.locals.loggedin,
+      accountData: res.locals.accountData // Pass account data here
+    });
+  } else {
+    // If not logged in, redirect to login page
+    res.redirect("/account/login");
+  }
+}
+
+async function accountLogout(req, res) {
+  res.clearCookie('jwt');
+  
+  // Optionally, redirect the user or render a page
+  res.redirect('/');
+}
+
+
+// buildAccountUpdate
+// Build the account home page
+async function buildAccountUpdate(req, res, next) {
+  // Get navigation data
+  let nav = await utilities.getNav();
+  
+  // Check if user is logged in and account data is available
+  console.log(res.locals.loggedin)
+  if (res.locals.loggedin === 1) {
+    // Pass account data to the view for rendering
+    res.render("account/update", {
+      title: "Account Management",
+      nav,
+      errors: null,
+      loggedin: res.locals.loggedin,
+      accountData: res.locals.accountData // Pass account data here
+    });
+  } else {
+    // If not logged in, redirect to login page
+    res.redirect("/account/login");
+  }
 }
 
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate }

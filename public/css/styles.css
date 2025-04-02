@@ -36,6 +36,18 @@ body {
   color: #333;
   text-decoration: none;
   text-transform: uppercase;
+  transition: transform .3s ease-in-out, color 0.3s ease-in-out; /* Separate transition for color */
+  display: inline-block;
+}
+
+#tools a:hover {
+  transform: scale(1.2); /* Increase the scaling factor */
+  color: #6d0000;
+  transform-origin: center; /* Ensure scaling happens from the center */
+}
+
+#tools span {
+  margin-right: 1rem;
 }
 
 nav {
@@ -620,6 +632,80 @@ input:required:valid {
   animation: fadeOut 10s ease-out forwards;
 }
 
+/* General container for account greeting */
+.account-greeting {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.account-greeting h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+/* Inventory management section */
+.inventory-management {
+  background-color: #e9f7f1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.inventory-management h3 {
+  font-size: 20px;
+  color: #2a8f7d;
+}
+
+.inventory-management p a {
+  color: #2a8f7d;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  display: inline-block;
+}
+
+.inventory-management p a:hover {
+  transform: scale(1.2);
+}
+
+/* Update account information section */
+.update-account-info {
+  background-color: #f9e5d9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.update-account-info p {
+  text-align: center;
+}
+
+.update-account-info p a {
+  color: #d87a28;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+  display: inline-block;
+  text-align: center;
+}
+
+.update-account-info p a:hover {
+  transform: scale(1.1);
+}
+
+/* Message for non-logged-in users */
+.not-logged-in {
+  background-color: #ffd1d1;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.not-logged-in h2 {
+  font-size: 20px;
+  color: #b40000;
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -699,6 +785,7 @@ input:required:valid {
   #tools a {
     font-size: 1rem;
   }
+
 
   nav {
     height: 50px;

@@ -24,4 +24,10 @@ router.post(
 
 router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountHome))
 
+// Send the logout request
+router.get('/logout', utilities.handleErrors(accountController.accountLogout));
+
+//Get the account update view
+router.get('/update', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountUpdate))
+
 module.exports = router;

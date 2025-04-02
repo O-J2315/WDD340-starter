@@ -151,6 +151,7 @@ Util.checkJWTToken = (req, res, next) => {
      }
      res.locals.accountData = accountData
      res.locals.loggedin = 1
+
      next()
     })
   } else {
@@ -169,5 +170,18 @@ Util.checkJWTToken = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+
+ //Middleware the check if the user is admin or an employee for certain views and processes
+ Util.checkAdminOrEmployee = (req, res, next) => {
+  // Check if the user is logged in and the account type is "Admin" or "Employee"
+  if (res.locals.loggedin && (res.locals.accountData.account_type === 'Admin' || res.locals.accountData.account_type === 'Employee')) {
+    return next(); // Allow the action to proceed
+  }
+
+  // If not, flash a message and redirect to the login page
+  req.flash('error', 'You must be an Admin or Employee to access this page.');
+  res.redirect('/account/login');
+};
 
 module.exports = Util
