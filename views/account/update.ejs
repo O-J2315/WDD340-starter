@@ -18,7 +18,7 @@
 <!-- Account Update Form -->
 <div class="register-form">
     <h2>Update Account Information</h2>
-    <form action="/account/update/<%= accountData.account_id %>" method="post" class="account-update-form">
+    <form action="/account/update" method="post" class="account-update-form">
 
         <label for="firstname">First Name:</label>
         <input type="text" id="firstname" name="account_firstname" required 
@@ -33,7 +33,7 @@
             value="<%= locals.account_email || accountData.account_email %>">
 
         <!-- Hidden account ID -->
-        <input type="hidden" name="account_id" value="<%= accountData.id %>">
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
 
         <button type="submit">Update Account</button>
     </form>
@@ -52,7 +52,7 @@
         <input type="password" id="confirmPassword" name="confirm_password" required>
 
         <!-- Hidden account ID -->
-        <input type="hidden" name="account_id" value="<%= accountData.id %>">
+        <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
 
         <button type="submit">Change Password</button>
     </form>

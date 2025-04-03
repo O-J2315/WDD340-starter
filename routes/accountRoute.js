@@ -30,4 +30,16 @@ router.get('/logout', utilities.handleErrors(accountController.accountLogout));
 //Get the account update view
 router.get('/update', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountUpdate))
 
+//Route to the update account request
+router.post('/update', regValidate.updateAccountRules(), regValidate.checkUpdateData, utilities.handleErrors(accountController.updateAccount))
+
+//Route to the password change request
+router.post(
+  "/update-password",
+  utilities.checkLogin, // Ensure user is logged in
+  regValidate.passwordUpdateRules(), // Validate password strength
+  regValidate.checkPasswordData, // Handle validation errors
+  accountController.updatePassword // Process password change
+);
+
 module.exports = router;

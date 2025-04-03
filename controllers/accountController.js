@@ -178,5 +178,100 @@ async function buildAccountUpdate(req, res, next) {
   }
 }
 
+//Process the account update
+async function updateAccount(req, res) {
+  let nav = await utilities.getNav();
+  const { account_firstname, account_lastname, account_email, account_id } = req.body;
+
+  try {
+      const updateResult = await accountModel.updateAccount(
+          account_firstname,
+          account_lastname,
+          account_email,
+          account_id
+      );
+
+      if (updateResult) {
+          const resultData = await accountModel.getAccountById(account_id)
+          const nav = await utilities.getNav()
+
+          if (resultData) {
+            // Store the updated account info in session (if using sessions)
+            req.session.accountData = resultData;
+            
+            // res.locals if needed immediately
+            res.locals.accountData = resultData;
+        }
+
+
+          req.flash("notice", `Your account information has been updated successfully, ${account_firstname}.`);
+          return res.render("account/", {
+            title: 'Account Management',
+            errors: null,
+            nav,
+            accountData: resultData
+          });
+      } else {
+          req.flash("notice", "Sorry, the update failed.");
+          res.status(500).render("account/update", {
+              title: "Update Account",
+              nav,
+              errors: null,
+              account_firstname,
+              account_lastname,
+              account_email,
+              account_id,
+          });
+      }
+  } catch (error) {
+      console.error("Error updating account:", error);
+      req.flash("notice", "An unexpected error occurred. Please try again.");
+      res.status(500).render("account/update", {
+          title: "Update Account",
+          nav,
+          errors: null,
+          account_firstname,
+          account_lastname,
+          account_email,
+          account_id,
+      });
+  }
+}
+
+//Process the password change request
+async function updatePassword(req, res) {
+  let nav = await utilities.getNav();
+  const { new_password, account_id } = req.body;
+
+  try {
+      // Hash the new password
+      const hashedPassword = await bcrypt.hash(new_password, 10);
+
+      // Update the password in the database
+      const updateResult = await accountModel.updateAccountPassword(hashedPassword, account_id);
+
+      if (updateResult) {
+          req.flash("notice", "Your password has been updated successfully.");
+          return res.redirect("/account/");
+      } else {
+          req.flash("notice", "Sorry, the password update failed.");
+          return res.status(500).render("account/update", {
+              title: "Update Password",
+              nav,
+              errors: null,
+              account_id,
+          });
+      }
+  } catch (error) {
+      console.error("Error updating password:", error);
+      req.flash("notice", "An unexpected error occurred. Please try again.");
+      return res.status(500).render("account/update", {
+          title: "Update Password",
+          nav,
+          errors: null,
+          account_id,
+      });
+  }
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate, updateAccount, updatePassword }

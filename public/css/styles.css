@@ -652,6 +652,10 @@ input:required:valid {
   padding: 15px;
   border-radius: 8px;
   margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .inventory-management h3 {
@@ -692,6 +696,11 @@ input:required:valid {
 
 .update-account-info p a:hover {
   transform: scale(1.1);
+}
+
+.update-title {
+  text-align: center;
+  padding: 1rem;
 }
 
 /* Message for non-logged-in users */

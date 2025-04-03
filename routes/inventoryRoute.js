@@ -42,4 +42,7 @@ router.get('/delete/:invId', utilities.checkJWTToken, utilities.checkAdminOrEmpl
 //Delete request
 router.post('/delete/', utilities.checkJWTToken, utilities.checkAdminOrEmployee, utilities.handleErrors(invController.deleteInventoryItem))
 
+
+
+
 module.exports = router;
