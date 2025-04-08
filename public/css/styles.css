@@ -715,6 +715,73 @@ input:required:valid {
   color: #b40000;
 }
 
+.management-account {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem auto;
+  background-color: #ffffff;
+}
+
+.management-account h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 1rem;
+  color: #141870;
+}
+
+.management-account table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem auto;
+}
+
+.table-header th {
+  background-color: #333333b9;
+  color: #fff;
+  padding: .5rem;
+  text-align: left;
+}
+
+.tbody-active tbody tr {
+  background-color: #f1f1f1;
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding: .5rem;
+}
+
+.tbody-active tbody tr:hover {
+  background-color: #333333b9;
+  color: #fff;
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
+}
+
+.tbody-active tr td {
+  transition: all 0.3s ease-in-out;
+  text-align: left;
+  padding: .5rem;
+}
+
+.tbody-active tr td a {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+.tbody-active tr td a:hover {
+  color: #f02929;
+  transform: scale(1.1);
+  transition: all 0.3s ease-in-out;
+  font-style: bold;
+}
+
+
+
 @keyframes fadeOut {
   0% {
     opacity: 1;

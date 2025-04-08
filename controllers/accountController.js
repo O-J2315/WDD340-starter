@@ -273,5 +273,47 @@ async function updatePassword(req, res) {
       });
   }
 }
+
+
+/* ***************************
+ *  Return Eomloyee and customer accounts list
+ * ************************** */
+async function getAccountListJSON(req, res) {
+  try {
+    const accountList = await accountModel.getAccountListJSON()
+    res.json(accountList)
+  } catch (error) {
+    console.error("Error fetching account list:", error)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
+//Build account management view
+async function buildAccountManagement(req, res) {
+  let nav = await utilities.getNav()
+  res.render("account/management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  })
+}
+
+async function deleteAccount(req, res) {
+  const account_id = req.params.account_id
+  try {
+    const result = await accountModel.deleteAccount(account_id)
+    if (result) {
+      req.flash("notice", "Account deleted successfully.")
+      res.redirect("/account/manage")
+    } else {
+      req.flash("notice", "Failed to delete the account.")
+      res.redirect("/account/manage")
+    }
+  } catch (error) {
+    console.error("Error deleting account:", error)
+    req.flash("notice", "An error occurred while deleting the account.")
+    res.redirect("/account/manage")
+  }
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate, updateAccount, updatePassword }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate, updateAccount, updatePassword, getAccountListJSON, buildAccountManagement, deleteAccount }

@@ -1,0 +1,17 @@
+<% if (title) { %>
+    <h1 class="management-title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+<div class="management-account" id="management-account">
+    <h2>Account List</h2>
+</div>
+
+
+
+<noscript>Javascript must be enabled to use this page.</noscript>
+
+<script src="../../js/account.js"></script>

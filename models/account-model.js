@@ -83,4 +83,28 @@ async function updateAccountPassword(hashedPassword, account_id) {
   }
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updateAccountPassword }
+
+//Return accounts type employee and customer
+async function getAccountListJSON() {
+  try {
+      const sql = "SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account WHERE account_type IN ('Employee', 'Client')";
+      const result = await pool.query(sql);
+      return result.rows; // Return the list of accounts
+  } catch (error) {
+      console.error("Error fetching account list:", error);
+      return []; // Return an empty array on error
+  }
+}
+
+async function deleteAccount(account_id) {
+  try {
+      const sql = "DELETE FROM account WHERE account_id = $1";
+      const result = await pool.query(sql, [account_id]);
+      return result.rowCount > 0; // Returns true if a row was deleted
+  } catch (error) {
+      console.error("Error deleting account:", error);
+      return false; // Returns false if an error occurred
+  }
+}
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, getAccountById, updateAccountPassword, getAccountListJSON, deleteAccount }

@@ -42,4 +42,14 @@ router.post(
   accountController.updatePassword // Process password change
 );
 
+
+//Route to get an account list
+router.get('/getAccountList', utilities.checkLogin, utilities.handleErrors(accountController.getAccountListJSON))
+
+//build the account management view
+router.get('/manage', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
+
+//Route to delete an account
+router.get('/delete/:account_id', utilities.checkLogin, utilities.handleErrors(accountController.deleteAccount))
+
 module.exports = router;
