@@ -6,7 +6,6 @@
 
   <%- messages() %>
 
-  <p> <%- accountData.account_type %> </p>
 
   <!-- If the account type is Employee or Admin, show Inventory Management section -->
   <% if (accountData.account_type === 'Admin' || accountData.account_type === 'Employee') { %>

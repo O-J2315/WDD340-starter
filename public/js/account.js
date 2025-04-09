@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <td class="email" data-label="Email" style='font-style:italic;'>${element.account_email}</td>
           <td data-label="account type" class="account-type">${element.account_type}</td>
           <td class="actions" data-label="Actions">
-            <a href="/account/delete/${element.account_id}" class="action-link delete-link" title="Click to delete">Delete</a>
+            <a href="/account/delete-confirm/${element.account_id}" class="action-link delete-link" title="Click to delete">Delete</a>
           </td>
         </tr>
       `;

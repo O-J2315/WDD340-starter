@@ -50,6 +50,9 @@ router.get('/getAccountList', utilities.checkLogin, utilities.handleErrors(accou
 router.get('/manage', utilities.checkLogin, utilities.handleErrors(accountController.buildAccountManagement))
 
 //Route to delete an account
-router.get('/delete/:account_id', utilities.checkLogin, utilities.handleErrors(accountController.deleteAccount))
+router.post('/delete/:account_id', utilities.checkLogin, utilities.handleErrors(accountController.deleteAccount))
 
-module.exports = router;
+//Route to confirm delete an account
+router.get('/delete-confirm/:account_id', utilities.checkLogin, utilities.handleErrors(accountController.buildConfirmDelete))
+
+module.exports = router; 

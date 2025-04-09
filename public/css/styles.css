@@ -621,6 +621,12 @@ input:required:valid {
   border-color: #28a745; /* Valid textarea border color */
 }
 
+.management-form p {
+  color: rgb(97, 0, 0);
+  font-style: italic;
+  font-size: .8rem;
+}
+
 .notice li {
   list-style-type: circle;
   padding: 1rem;

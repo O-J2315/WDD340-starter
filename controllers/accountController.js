@@ -315,5 +315,21 @@ async function deleteAccount(req, res) {
     res.redirect("/account/manage")
   }
 }
+
+async function buildConfirmDelete(req, res) {
+  const account_id = req.params.account_id
+  let nav = await utilities.getNav()
+  const accountData = await accountModel.getAccountById(account_id)
+  if (!accountData) {
+    req.flash("notice", "Account not found.")
+    return res.redirect("/account/manage")
+  }
+  res.render("account/delete-confirm", {
+    title: "Confirm Delete",
+    nav,
+    errors: null,
+    accountData: accountData,
+  })
+}
   
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate, updateAccount, updatePassword, getAccountListJSON, buildAccountManagement, deleteAccount }
+  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountHome, accountLogout, buildAccountUpdate, updateAccount, updatePassword, getAccountListJSON, buildAccountManagement, deleteAccount, buildConfirmDelete }
