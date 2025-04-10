@@ -62,4 +62,4 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Inject full table HTML into the div
     container.appendChild(document.createRange().createContextualFragment(tableHTML));
-  }
+  };
