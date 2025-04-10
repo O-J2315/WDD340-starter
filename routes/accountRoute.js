@@ -55,4 +55,4 @@ router.post('/delete/:account_id', utilities.checkLogin, utilities.handleErrors(
 //Route to confirm delete an account
 router.get('/delete-confirm/:account_id', utilities.checkLogin, utilities.handleErrors(accountController.buildConfirmDelete))
 
-module.exports = router; 
+module.exports = router;
