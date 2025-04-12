@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let counter = 0;
   
     let tableHTML = `
-      <table class='tbody-active'>
+    <div class='tbody-active'>
+      <table>
         <thead>
           <tr class="table-header">
             <th class="col-firstname">First Name</th>
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     tableHTML += `
         </tbody>
       </table>
+    </div>
     `;
   
     // Inject full table HTML into the div
